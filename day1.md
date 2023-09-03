@@ -14,7 +14,20 @@ cd $ARDUPILOT_HOME # the top-level of an ArduPilot repository
 $ ./waf list_boards | grep 'fmuv3'
 
 ./waf configure --board fmuv3
-./waf copter --upload
+
+//아두콥터를 컴파일함 
+./waf copter
+
+
+./waf --targets bin/arducopter --upload
+--upload-port /dev/ttyS10
+
+
+https://intuitive-robotics.tistory.com/134
+ln -s /usr/bin/python3.6 /usr/bin/python
+ln -s /usr/bin/pip3.6 /usr/bin/pip
+pip install empy pyserial pymavlink
+
 
 $ ./waf list | grep 'examples'
 
@@ -42,5 +55,4 @@ $ cd ardupilot/
 $ ./waf configure --board fmuv3
 :~/ardupilot$ 
 
-//아두콥터를 컴파일함 
-./waf copter
+
