@@ -1,59 +1,97 @@
-// --------------------------------------
-// i2c_scanner
-//
-//
-
-#include <Wire.h>
+#include <Wire.h> //I2C Arduino Library
 
 
-void setup()
-{
-  Wire.begin();
-  
+
+#define addr 0x1E //I2C Address for The HMC5883
+
+
+
+void setup() {
+
+
+
   Serial.begin(9600);
-  while (!Serial);             // Leonardo: wait for serial monitor
-  Serial.println("\nI2C Scanner");
+
+  Wire.begin();
+
+
+
+
+
+  Wire.beginTransmission(addr); //start talking
+
+  Wire.write(0x02); // Set the Register
+
+  Wire.write(0x00); // Tell the HMC5883 to Continuously Measure
+
+  Wire.endTransmission();
+
 }
 
 
-void loop()
-{
-  byte error, address;
-  int nDevices;
 
-  Serial.println("Scanning...");
 
-  nDevices = 0;
-  for(address = 1; address < 127; address++ ) 
-  {
-    // The i2c_scanner uses the return value of
-    // the Write.endTransmisstion to see if
-    // a device did acknowledge to the address.
-    Wire.beginTransmission(address);
-    error = Wire.endTransmission();
 
-    if (error == 0)
-    {
-      Serial.print("I2C device found at address 0x");
-      if (address<16) 
-        Serial.print("0");
-      Serial.print(address,HEX);
-      Serial.println("  !");
+void loop() {
 
-      nDevices++;
-    }
-    else if (error==4) 
-    {
-      Serial.print("Unknown error at address 0x");
-      if (address<16) 
-        Serial.print("0");
-      Serial.println(address,HEX);
-    }    
+
+
+  int x, y, z; //triple axis data
+
+
+
+  //Tell the HMC what regist to begin writing data into
+
+  Wire.beginTransmission(addr);
+
+  Wire.write(0x03); //start with register 3.
+
+  Wire.endTransmission();
+
+
+
+
+
+  //Read the data.. 2 bytes for each axis.. 6 total bytes
+
+  Wire.requestFrom(addr, 6);
+
+  if (6 <= Wire.available()) {
+
+    x = Wire.read() << 8; //MSB  x
+
+    x |= Wire.read(); //LSB  x
+
+    z = Wire.read() << 8; //MSB  z
+
+    z |= Wire.read(); //LSB z
+
+    y = Wire.read() << 8; //MSB y
+
+    y |= Wire.read(); //LSB y
+
   }
-  if (nDevices == 0)
-    Serial.println("No I2C devices found\n");
-  else
-    Serial.println("done\n");
 
-  delay(5000);           // wait 5 seconds for next scan
+
+
+  // Show Values
+
+  Serial.print("X Value: ");
+
+  Serial.println(x);
+
+  Serial.print("Y Value: ");
+
+  Serial.println(y);
+
+  Serial.print("Z Value: ");
+
+  Serial.println(z);
+
+  Serial.println();
+
+
+
+  delay(500);
+
 }
