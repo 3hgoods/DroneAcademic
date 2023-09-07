@@ -1,97 +1,35 @@
-#include <Wire.h> //I2C Arduino Library
+#include <sbus.h>
 
 
+// used pins
+#define SBUS_PIN 53   // D3
 
-#define addr 0x1E //I2C Address for The HMC5883
 
+SBUS sbus;
 
 
 void setup() {
+  Serial.begin(115200);
 
-
-
-  Serial.begin(9600);
-
-  Wire.begin();
-
-
-
-
-
-  Wire.beginTransmission(addr); //start talking
-
-  Wire.write(0x02); // Set the Register
-
-  Wire.write(0x00); // Tell the HMC5883 to Continuously Measure
-
-  Wire.endTransmission();
-
+  sbus.begin(SBUS_PIN, sbusNonBlocking);  
 }
-
-
-
 
 
 void loop() {
 
-
-
-  int x, y, z; //triple axis data
-
-
-
-  //Tell the HMC what regist to begin writing data into
-
-  Wire.beginTransmission(addr);
-
-  Wire.write(0x03); //start with register 3.
-
-  Wire.endTransmission();
-
-
-
-
-
-  //Read the data.. 2 bytes for each axis.. 6 total bytes
-
-  Wire.requestFrom(addr, 6);
-
-  if (6 <= Wire.available()) {
-
-    x = Wire.read() << 8; //MSB  x
-
-    x |= Wire.read(); //LSB  x
-
-    z = Wire.read() << 8; //MSB  z
-
-    z |= Wire.read(); //LSB z
-
-    y = Wire.read() << 8; //MSB y
-
-    y |= Wire.read(); //LSB y
-
+  for (int i=1; i <= 18; ++i) {
+    Serial.print(sbus.getChannel(i)); 
+    Serial.print(" ");
   }
-
-
-
-  // Show Values
-
-  Serial.print("X Value: ");
-
-  Serial.println(x);
-
-  Serial.print("Y Value: ");
-
-  Serial.println(y);
-
-  Serial.print("Z Value: ");
-
-  Serial.println(z);
-
+  
+  if (sbus.signalLossActive())
+    Serial.print("SIGNAL_LOSS ");
+    
+  if (sbus.failsafeActive())
+    Serial.print("FAILSAFE");
+    
   Serial.println();
-
-
-
-  delay(500);
+    
+  delay(200);
 
 }
