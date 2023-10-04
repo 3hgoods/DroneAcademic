@@ -43,3 +43,10 @@ Restart will not boot.
  
 
 Updated the BIOS to latest.
+
+. ~/.profile
+
+cd ~/ardupilot/ArduCopter
+sim_vehicle.py -w
+
+
