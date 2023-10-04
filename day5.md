@@ -20,7 +20,23 @@ sudo ubuntu-drivers autoinstall
 sudo apt update
 sudo apt upgrade
 
+
+
+ubuntu-drivers devices
+
+현재 사용중인 그래픽카드 확인
+
+lshw -numeric -C display
+
+lspci | grep -i nvidia
+
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
  
+
+sudo apt install nvidia-driver-465 nvidia-settings
+
+ sudo reboot now 
 
 Restart will not boot.
 
