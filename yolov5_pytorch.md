@@ -33,6 +33,21 @@ sudo apt install nvidia-cuda-toolki
 #Reading state information... Done
 #E: Unable to locate package nvidia-cuda-toolk
 
+# https://www.if-not-true-then-false.com/2021/install-nvidia-cuda-toolkit-on-ubuntu-debian-linux-mint/
+# https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=runfile_local
+
+wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run
+wget https://developer.download.nvidia.com/compute/cuda/12.2.2/local_installers/cuda_12.2.2_535.104.05_linux.run
+
+#chmod +x cuda_12.2*.run
+
+sudo sh cuda_12.2.2_535.104.05_linux.run
+
+https://www.nvidia.com/Download/Find.aspx?lang=en-us
+#상위 버전도 다운로드 테스트 
+
+
+
 # https://pytorch.org/  check cuda
 
 nvcc --version
@@ -41,12 +56,19 @@ nvcc --version
 nvidia-smi
 #CUDA Version: 12.2
 
+# 다른 설치 방법  -- 아래 설치 방법은 생략가능
 # https://developer.nvidia.com/cuda-12-1-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_network
 
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
 sudo dpkg -i cuda-keyring_1.0-1_all.deb
 sudo apt-get update
 sudo apt-get -y install cuda  # 12.1
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda # 12.2
+
 
 
 # Install PyTorch
