@@ -43,8 +43,8 @@ wget https://developer.download.nvidia.com/compute/cuda/12.2.2/local_installers/
 
 sudo sh cuda_12.2.2_535.104.05_linux.run
 
-https://www.nvidia.com/Download/Find.aspx?lang=en-us
-#상위 버전도 다운로드 테스트 
+# 상위 버전드라이브도 다운로드 테스트  https://www.nvidia.com/Download/Find.aspx?lang=en-us
+
 
 
 
