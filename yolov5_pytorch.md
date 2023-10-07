@@ -12,6 +12,7 @@ conda env list
 conda create -n yolov5_1 python=3.8
 conda activate yolov5_1
 
+# 확인 후 conda deactivate x2
 
 #conda update pip
 #or 
@@ -19,12 +20,20 @@ conda activate yolov5_1
 
 2단계 PyTorch labelImg 설치
 
+nvidia-smi
+#  NVIDIA-SMI 525.125.06   Driver Version: 525.125.06   CUDA Version: 12.
+
 nvcc --version
-#10.1
+#Command 'nvcc' not found, but can be installed with:
+#sudo apt install nvidia-cuda-toolki
+
+sudo apt install nvidia-cuda-toolki
+#Reading package lists... Done
+#Building dependency tree       
+#Reading state information... Done
+#E: Unable to locate package nvidia-cuda-toolk
 
 # https://pytorch.org/  check cuda
-
-sudo apt-get install cuda-11-7
 
 nvcc --version
 #10.1
@@ -32,8 +41,17 @@ nvcc --version
 nvidia-smi
 #CUDA Version: 12.2
 
+# https://developer.nvidia.com/cuda-12-1-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_network
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda  # 12.1
+
+
 # Install PyTorch
-conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+
 
 # Install labelimg (git clone labelimg)
 git clone https://github.com/tzutalin/labelImg
