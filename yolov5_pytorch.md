@@ -33,6 +33,7 @@ sudo apt install nvidia-cuda-toolki
 #Reading state information... Done
 #E: Unable to locate package nvidia-cuda-toolk
 
+--------------------------------------------cuda start-------아래 중 하나 선택----------------------------------------------
 # https://www.if-not-true-then-false.com/2021/install-nvidia-cuda-toolkit-on-ubuntu-debian-linux-mint/
 # https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=runfile_local
 
@@ -69,12 +70,14 @@ sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt-get update
 sudo apt-get -y install cuda # 12.2
 
-
+--------------------------------------cuda end -------------------------------------------------------------------
 
 # Install PyTorch
-conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+conda activate yolov5_1
+(yolov5_1)conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 
 
+-----------------labelimg  start -------------------------
 # Install labelimg (git clone labelimg)
 git clone https://github.com/tzutalin/labelImg
 
@@ -85,7 +88,11 @@ pip install -r requirements/requirements-linux-python3.txt
 make qt5py3
 
 #python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
+-----------------labelimg  end -------------------------
 
+
+
+-----------------yolo v5  start -------------------------
 
 3단계 yolo v5설치
 git clone https://github.com/ultralytics/yolov5
