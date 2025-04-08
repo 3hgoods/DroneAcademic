@@ -24,4 +24,8 @@ HRD-Net 홈페이지(www.hrd.go.kr)에 접속합니다
 
 안내과정
 한국기술대학교 직업능력심사평가원 에 도식과 준비서류등을 안내받아 진행.
+https://www.ksqa.or.kr/?pid=HP0201
+https://www.ksqa.or.kr/?bbsMode=view&bbsId=BBSMSTR_000000000031&nttId=45669&pid=HP010201&pageIndex=1&searchCnd=&searchWrd=&category_board=
+
+
 
